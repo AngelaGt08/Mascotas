@@ -15,4 +15,10 @@ public interface PerrosRepository extends JpaRepository<PerrosEntity,Long> {
     List<PerrosEntity> buscarPorNombrePerroJPQL(String nombre);
 
     List<PerrosEntity> findByNombre(String nombre);
+
+    List<PerrosEntity> findByRaza (String raza);
+
+    List<PerrosEntity> findByEdad (double edad);
+
+
 }

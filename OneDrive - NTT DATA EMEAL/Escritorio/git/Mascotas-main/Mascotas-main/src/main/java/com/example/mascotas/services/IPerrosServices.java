@@ -11,17 +11,18 @@ public interface IPerrosServices {
 
     ResponseEntity getAllPerros();
 
-
     ResponseEntity getPerrosNameNativeQuery(String nombre);
 
     ResponseEntity getPerrosNameForJPQL(String nombre);
 
-
     ResponseEntity getPerrosNameForJpaRepository(String nombre);
 
 
-    ResponseEntity putPerrosInformation(PerrosEntity perrosEntity);
+    ResponseEntity getPerrosRazaForJpaREpository(String raza);
 
+    ResponseEntity getPerrosEdadForJpaRepository(double edad);
+
+    ResponseEntity putPerrosInformation(PerrosEntity perrosEntity);
 
     ResponseEntity actualizarPerros(Long id, PerrosDTO perrosDTO);
 
@@ -31,6 +32,6 @@ public interface IPerrosServices {
 
     ResponseEntity savePerros(PerrosLombokDTO perrosLombokDTO);
 
-    ResponseEntity getEmployees();
+
 
 }

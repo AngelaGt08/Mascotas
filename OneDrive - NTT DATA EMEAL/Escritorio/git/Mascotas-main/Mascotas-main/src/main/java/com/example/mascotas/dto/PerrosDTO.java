@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -16,8 +15,6 @@ public class PerrosDTO {
 
     private String raza;
 
-    private double años;
-
-
+    private double edad;
 
 }

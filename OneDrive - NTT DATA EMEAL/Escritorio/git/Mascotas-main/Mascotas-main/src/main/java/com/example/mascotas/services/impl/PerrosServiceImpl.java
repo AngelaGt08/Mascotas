@@ -16,49 +16,50 @@ import java.util.Date;
 @Service
 public class PerrosServiceImpl implements IPerrosServices {
     private PerrosRepository perrosRepository;
-
     private  final EmployeeFeingProvider employeeFeingProvider;
 
     public PerrosServiceImpl(PerrosRepository perrosRepository, EmployeeFeingProvider employeeFeingProvider) {
         this.perrosRepository = perrosRepository;
         this.employeeFeingProvider = employeeFeingProvider;
     }
-
     public ResponseEntity guardarPerros(PerrosEntity perrosEntity) {
         perrosEntity.setFechaCreacion(new Date());
         PerrosEntity perros = perrosRepository.save(perrosEntity);
         return ResponseEntity.ok(perros);
     }
-
     @Override
     public ResponseEntity getAllPerros() {
         return ResponseEntity.ok(perrosRepository.findAll());
     }
-
     @Override
     public ResponseEntity getPerrosNameNativeQuery(String nombre) {
         return ResponseEntity.ok(perrosRepository.buscarPorNombrePerro(nombre));
     }
-
     @Override
     public ResponseEntity getPerrosNameForJPQL(String nombre) {
         return ResponseEntity.ok(perrosRepository.buscarPorNombrePerroJPQL(nombre));
     }
-
     @Override
     public ResponseEntity getPerrosNameForJpaRepository(String nombre) {
         return ResponseEntity.ok(perrosRepository.findByNombre(nombre));
     }
+    @Override
+    public ResponseEntity getPerrosRazaForJpaREpository(String raza){
+        return ResponseEntity.ok(perrosRepository.findByRaza(raza));
+    }
 
+    @Override
+    public ResponseEntity getPerrosEdadForJpaRepository(double edad){
+        return ResponseEntity.ok(perrosRepository.findByEdad(edad));
+    }
     @Override
     public ResponseEntity putPerrosInformation(PerrosEntity perrosEntity) {
         PerrosEntity perros = perrosRepository.findById(perrosEntity.getId()).orElse(new PerrosEntity());
         perros.setNombre(perrosEntity.getNombre());
         perros.setRaza(perrosEntity.getRaza());
         perrosRepository.save(perros);
-        return ResponseEntity.ok("Registro actualizado");
+        return ResponseEntity.ok(AppConstans.ACTUALIZADO_EXITOSAMENTE);
     }
-
     public ResponseEntity actualizarPerros(Long id, PerrosDTO perrosDTO) {
            var perrosOptional = perrosRepository.findById(id);
 
@@ -68,14 +69,12 @@ public class PerrosServiceImpl implements IPerrosServices {
         perrosRepository.save(perrosEntity);
         return ResponseEntity.ok(AppConstans.ACTUALIZADO_EXITOSAMENTE);
     }
-
     @Override
     public ResponseEntity deleteHard(Long id) {
         var perrosOptional = perrosRepository.findById(id);
         perrosRepository.delete(perrosOptional.get());
         return ResponseEntity.ok().build();
     }
-
     @Override
     public ResponseEntity deleteLogic(Long id) {
 
@@ -87,7 +86,6 @@ public class PerrosServiceImpl implements IPerrosServices {
         return ResponseEntity.ok("Se elimino el registro de la mascota");
 
     }
-
     @Override
     public ResponseEntity savePerros(PerrosLombokDTO perrosLombokDTO) {
 
@@ -102,16 +100,6 @@ public class PerrosServiceImpl implements IPerrosServices {
         return ResponseEntity.ok(perros);
 
     }
-
-    @Override
-    public ResponseEntity getEmployees() {
-        ResponseBodyDTO responseBodyDTO;
-        ResponseEntity responseEntity ;
-        responseBodyDTO= employeeFeingProvider.getListEmployee();
-        responseEntity= ResponseEntity.ok(responseBodyDTO);
-        return responseEntity;
-    }
-
 
 
 }

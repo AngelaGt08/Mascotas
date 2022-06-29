@@ -7,14 +7,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-public interface PerrosDocs {
+public interface Docs {
 
-    @Operation(summary = "Servicio para traer informacion de perros")
+    @Operation(summary = "Servicio para traer informacion")
     @ApiResponses(
             value = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "retorna listado perros",
+                            description = "retorna listado",
                             content = {
                                     @Content(
                                             mediaType = MediaType.APPLICATION_JSON_VALUE

@@ -14,6 +14,6 @@ public class PerrosLombokDTO {
 
     private String raza;
 
-    private double años;
+    private double edad;
 
 }

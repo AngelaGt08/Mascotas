@@ -17,13 +17,12 @@ public class PerrosController {
         this.iPerrosServices = iPerrosServices;
     }
 
-    @PostMapping
+    @PostMapping("/guardar")
     public ResponseEntity guardarPerros(@RequestBody PerrosEntity perrosEntity){
-
         return iPerrosServices.guardarPerros(perrosEntity);
     }
 
-    @GetMapping
+    @GetMapping("/Lista")
     public ResponseEntity listAllPerros(){
         return iPerrosServices.getAllPerros();
     }
@@ -33,19 +32,27 @@ public class PerrosController {
         return iPerrosServices.getPerrosNameNativeQuery(nombre);
     }
 
-
     @GetMapping("/nombre/jpql")
     public ResponseEntity getPerrosForJPQL(@PathParam("nombre") String nombre){
         return iPerrosServices.getPerrosNameForJPQL(nombre);
     }
-
 
     @GetMapping("/nombre/jpa-repository")
     public ResponseEntity getPerrosForJPARespository(@PathParam("nombre") String nombre){
         return iPerrosServices.getPerrosNameForJpaRepository(nombre);
     }
 
-    @PutMapping
+    @GetMapping("/raza/jpa-repository")
+    public ResponseEntity getPerrosRazaForJPARepository(@PathParam("raza") String raza){
+        return iPerrosServices.getPerrosRazaForJpaREpository(raza);
+    }
+
+    @GetMapping("/edad/jpa-repository")
+    public ResponseEntity getPerrosEdadForJPARepository(@PathParam("edad")double edad){
+        return iPerrosServices.getPerrosEdadForJpaRepository(edad);
+    }
+
+    @PutMapping("/modificar")
     public ResponseEntity modificarPerros(@RequestBody PerrosEntity perrosEntity){
         return iPerrosServices.putPerrosInformation(perrosEntity) ;
     }
@@ -59,4 +66,5 @@ public class PerrosController {
     public ResponseEntity deleteHard(@PathVariable Long id){
         return iPerrosServices.deleteLogic(id);
     }
+
 }
